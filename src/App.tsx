@@ -6,52 +6,29 @@ const CANVAS_HEIGHT = 1536;
 
 const BACKGROUND_IMAGE = "/invitation-background.png";
 
-/*
-|--------------------------------------------------------------------------
-| DEFAULT TEXT
-|--------------------------------------------------------------------------
-*/
-
 const DEFAULT_MAIN_MESSAGE =
   "හි පිහිටා ඇති අභිනවයෙන් කරන ලද කතරගම දේවතාවන්ගේ දේව පිළිමය හා පත්තිනි දේවතාවුන්ගේ දේව පිළිමය තැන්පත් කිරීම හා කතරගම දේව හෝම පූජා කිරීමේ පුණ්‍යමහෝත්සවය වෙනුවෙන් පැවැත්වෙන විශේෂ පිංකම් මාලාව සඳහා";
 
 const DEFAULT_FINAL_MESSAGE =
-  "මෙම උතුම් පුණ්‍ය කර්මයට සහභාගී වී දේව ආශිර්වාදය ලබාගන්නා මෙන් ඔබ සැම ගෞරවයෙන් හා භක්තියෙන් යුතුව ආරාධනා කර සිටිමු.";
-
-/*
-|--------------------------------------------------------------------------
-| APP
-|--------------------------------------------------------------------------
-*/
+  "මෙම උතුම් පුණ්‍ය කර්මයට සහභාගී වී දේව ආශිර්වාදය ලබාගන්නා මෙන් ඔබ සැම ගෞරවයෙන් හා භක්තියෙන් යුතුව කැඳවා සිටිමු.";
 
 function App() {
-  const canvasRef =
-    useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [background, setBackground] =
     useState<HTMLImageElement | null>(null);
 
-  /*
-  |--------------------------------------------------------------------------
-  | INVITATION DATA
-  |--------------------------------------------------------------------------
-  */
-
   const [topGreeting, setTopGreeting] =
-    useState(
-      "දේව ආශිර්වාදයයි!"
-    );
+    useState("දේව ආශිර්වාදයයි!");
 
   const [invitationTitle, setInvitationTitle] =
-    useState(
-      "ආරාධනයයි"
-    );
+    useState("ආරාධනයයි");
 
   const [inviteeName, setInviteeName] =
     useState("");
 
   const [inviteeType, setInviteeType] =
-  useState<"single" | "group">("single");
+    useState<"single" | "group">("single");
 
   const [venueName, setVenueName] =
     useState(
@@ -59,49 +36,28 @@ function App() {
     );
 
   const [location, setLocation] =
-    useState(
-      "බණ්ඩාරගම"
-    );
+    useState("බණ්ඩාරගම");
 
   const [mainMessage, setMainMessage] =
-    useState(
-      DEFAULT_MAIN_MESSAGE
-    );
+    useState(DEFAULT_MAIN_MESSAGE);
 
   const [scheduleTitle, setScheduleTitle] =
-    useState(
-      "පිංකම් මාලාවේ කාලසටහන"
-    );
+    useState("පිංකම් මාලාවේ කාලසටහන");
 
   const [eventDate, setEventDate] =
-    useState(
-      "2026 ක් වු බිනර මස 15 වන"
-    );
+    useState("2026 ක් වු බිනර මස 15 වන");
 
   const [eventDay, setEventDay] =
-    useState(
-      "අඟහරුවාදා"
-    );
+    useState("අඟහරුවාදා");
 
   const [auspiciousTime, setAuspiciousTime] =
-    useState(
-      "[වේලාව]"
-    );
+    useState("[වේලාව]");
 
   const [poojaTime, setPoojaTime] =
-    useState(
-      "[වේලාව]"
-    );
+    useState("[වේලාව]");
 
   const [finalMessage, setFinalMessage] =
-    useState(
-      DEFAULT_FINAL_MESSAGE
-    );
-
-  const invitationAudience =
-  inviteeType === "single"
-    ? "ඔබට"
-    : "ඔබ සැමට";
+    useState(DEFAULT_FINAL_MESSAGE);
 
   /*
   |--------------------------------------------------------------------------
@@ -110,8 +66,7 @@ function App() {
   */
 
   useEffect(() => {
-    const image =
-      new Image();
+    const image = new Image();
 
     image.onload = () => {
       setBackground(image);
@@ -119,42 +74,41 @@ function App() {
 
     image.onerror = () => {
       console.error(
-        `Unable to load background image: ${BACKGROUND_IMAGE}`
+        "Unable to load invitation-background.png"
       );
     };
 
-    image.src =
-      BACKGROUND_IMAGE;
+    image.src = BACKGROUND_IMAGE;
   }, []);
 
   /*
   |--------------------------------------------------------------------------
-  | REDRAW WHEN DATA CHANGES
+  | REDRAW
   |--------------------------------------------------------------------------
   */
 
   useEffect(() => {
-  if (!background) {
-    return;
-  }
+    if (!background) {
+      return;
+    }
 
-  drawInvitation();
-}, [
-  background,
-  topGreeting,
-  invitationTitle,
-  inviteeName,
-  inviteeType,
-  venueName,
-  location,
-  mainMessage,
-  scheduleTitle,
-  eventDate,
-  eventDay,
-  auspiciousTime,
-  poojaTime,
-  finalMessage,
-]);
+    drawInvitation();
+  }, [
+    background,
+    topGreeting,
+    invitationTitle,
+    inviteeName,
+    inviteeType,
+    venueName,
+    location,
+    mainMessage,
+    scheduleTitle,
+    eventDate,
+    eventDay,
+    auspiciousTime,
+    poojaTime,
+    finalMessage,
+  ]);
 
   /*
   |--------------------------------------------------------------------------
@@ -163,15 +117,13 @@ function App() {
   */
 
   const drawInvitation = () => {
-    const canvas =
-      canvasRef.current;
+    const canvas = canvasRef.current;
 
     if (!canvas || !background) {
       return;
     }
 
-    const context =
-      canvas.getContext("2d");
+    const context = canvas.getContext("2d");
 
     if (!context) {
       return;
@@ -179,15 +131,15 @@ function App() {
 
     /*
     |--------------------------------------------------------------------------
-    | CANVAS SIZE
+    | IMPORTANT
+    |
+    | Keep the real canvas at 1024 x 1536.
+    | CSS will resize it for mobile.
     |--------------------------------------------------------------------------
     */
 
-    canvas.width =
-      CANVAS_WIDTH;
-
-    canvas.height =
-      CANVAS_HEIGHT;
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
 
     context.clearRect(
       0,
@@ -210,15 +162,11 @@ function App() {
       CANVAS_HEIGHT
     );
 
-    context.textAlign =
-      "center";
-
-    context.textBaseline =
-      "middle";
+    context.textBaseline = "middle";
 
     /*
     |--------------------------------------------------------------------------
-    | TOP GREETING
+    | GREETING
     |--------------------------------------------------------------------------
     */
 
@@ -235,7 +183,7 @@ function App() {
 
     /*
     |--------------------------------------------------------------------------
-    | INVITATION TITLE
+    | TITLE
     |--------------------------------------------------------------------------
     */
 
@@ -263,7 +211,7 @@ function App() {
       700,
       25,
       "#4e2b22",
-      820,
+      850,
       500
     );
 
@@ -277,7 +225,7 @@ function App() {
       context,
       location,
       512,
-      740,
+      745,
       25,
       "#4e2b22",
       700,
@@ -286,7 +234,7 @@ function App() {
 
     /*
     |--------------------------------------------------------------------------
-    | MAIN INVITATION MESSAGE
+    | MAIN MESSAGE
     |--------------------------------------------------------------------------
     */
 
@@ -294,10 +242,10 @@ function App() {
       context,
       mainMessage,
       512,
-      790,
+      800,
       790,
       24,
-      35,
+      36,
       "#4e2b22",
       4
     );
@@ -306,51 +254,53 @@ function App() {
     |--------------------------------------------------------------------------
     | INVITEE NAME
     |--------------------------------------------------------------------------
-    |
-    | This is intentionally separated from the main paragraph.
-    |
     */
 
     if (inviteeName.trim()) {
       drawInviteeName(
         context,
-        inviteeName.trim(),
+        inviteeName.trim()
       );
     }
 
     drawWrappedText(
       context,
-      "..........................................................................................",
+      "..................................................................................",
       512,
-      945,
+      955,
       790,
       24,
-      35,
+      36,
       "#4e2b22",
       2
     );
 
     /*
     |--------------------------------------------------------------------------
-    | INVITEE FINAL SENTENCE
+    | DYNAMIC AUDIENCE
     |--------------------------------------------------------------------------
     */
+
+    const invitationAudience =
+      inviteeType === "single"
+        ? "ඔබට"
+        : "ඔබ සැමට";
 
     drawWrappedText(
       context,
       `${invitationAudience} කාරුණිකව ආරාධනා කර සිටිමු.`,
       512,
-      975,
+      985,
       790,
       24,
-      35,
+      36,
       "#4e2b22",
       2
     );
 
     /*
     |--------------------------------------------------------------------------
-    | SCHEDULE TITLE
+    | SCHEDULE
     |--------------------------------------------------------------------------
     */
 
@@ -385,7 +335,7 @@ function App() {
 
     /*
     |--------------------------------------------------------------------------
-    | POOJA TIME
+    | POOJA
     |--------------------------------------------------------------------------
     */
 
@@ -408,7 +358,7 @@ function App() {
       1280,
       760,
       24,
-      35,
+      36,
       "#4e2b22",
       4
     );
@@ -416,7 +366,7 @@ function App() {
 
   /*
   |--------------------------------------------------------------------------
-  | DRAW INVITEE NAME
+  | INVITEE NAME
   |--------------------------------------------------------------------------
   */
 
@@ -424,7 +374,7 @@ function App() {
     context: CanvasRenderingContext2D,
     value: string
   ) => {
-    let fontSize = 30;
+    let fontSize = 44;
 
     if (value.length > 18) {
       fontSize = 44;
@@ -442,37 +392,31 @@ function App() {
       fontSize = 31;
     }
 
-    context.textAlign =
-      "center";
+    context.textAlign = "center";
 
     context.font =
       `700 ${fontSize}px "Noto Sans Sinhala", sans-serif`;
 
-    context.fillStyle =
-      "#76261f";
+    context.fillStyle = "#76261f";
 
     context.shadowColor =
-      "rgba(255, 255, 255, 0.85)";
+      "rgba(255,255,255,0.85)";
 
-    context.shadowBlur =
-      5;
+    context.shadowBlur = 5;
 
     context.fillText(
       value,
       512,
-      930
+      945
     );
 
-    context.shadowColor =
-      "transparent";
-
-    context.shadowBlur =
-      0;
+    context.shadowColor = "transparent";
+    context.shadowBlur = 0;
   };
 
   /*
   |--------------------------------------------------------------------------
-  | DRAW CENTERED TEXT
+  | CENTERED TEXT
   |--------------------------------------------------------------------------
   */
 
@@ -486,11 +430,9 @@ function App() {
     maxWidth: number,
     fontWeight: number
   ) => {
-    let currentFontSize =
-      fontSize;
+    let currentFontSize = fontSize;
 
-    context.textAlign =
-      "center";
+    context.textAlign = "center";
 
     context.font =
       `${fontWeight} ${currentFontSize}px "Noto Sans Sinhala", sans-serif`;
@@ -498,7 +440,7 @@ function App() {
     while (
       context.measureText(text).width >
         maxWidth &&
-      currentFontSize > 16
+      currentFontSize > 15
     ) {
       currentFontSize--;
 
@@ -506,8 +448,7 @@ function App() {
         `${fontWeight} ${currentFontSize}px "Noto Sans Sinhala", sans-serif`;
     }
 
-    context.fillStyle =
-      color;
+    context.fillStyle = color;
 
     context.fillText(
       text,
@@ -518,7 +459,7 @@ function App() {
 
   /*
   |--------------------------------------------------------------------------
-  | DRAW WRAPPED TEXT
+  | WRAPPED TEXT
   |--------------------------------------------------------------------------
   */
 
@@ -533,84 +474,101 @@ function App() {
     color: string,
     maxLines: number
   ) => {
-    context.textAlign =
-      "center";
+    context.textAlign = "center";
 
     context.font =
       `500 ${fontSize}px "Noto Sans Sinhala", sans-serif`;
 
-    context.fillStyle =
-      color;
+    context.fillStyle = color;
 
-    const words =
-      text.split(" ");
+    const words = text.split(" ");
 
-    const lines: string[] =
-      [];
+    const lines: string[] = [];
 
-    let currentLine =
-      "";
+    let currentLine = "";
 
-    for (
-      const word of words
-    ) {
+    for (const word of words) {
       const testLine =
         currentLine.length === 0
           ? word
           : `${currentLine} ${word}`;
 
       const width =
-        context.measureText(
-          testLine
-        ).width;
+        context.measureText(testLine).width;
 
       if (
         width > maxWidth &&
         currentLine.length > 0
       ) {
-        lines.push(
-          currentLine
-        );
+        lines.push(currentLine);
 
-        currentLine =
-          word;
+        currentLine = word;
       } else {
-        currentLine =
-          testLine;
+        currentLine = testLine;
       }
     }
 
-    if (
-      currentLine.length > 0
-    ) {
-      lines.push(
-        currentLine
-      );
+    if (currentLine.length > 0) {
+      lines.push(currentLine);
     }
 
     /*
     |--------------------------------------------------------------------------
-    | LIMIT LINES
+    | If text is too long, reduce font size
     |--------------------------------------------------------------------------
     */
 
+    let finalFontSize = fontSize;
+
+    if (lines.length > maxLines) {
+      finalFontSize = fontSize - 2;
+
+      context.font =
+        `500 ${finalFontSize}px "Noto Sans Sinhala", sans-serif`;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rebuild lines with smaller font
+    |--------------------------------------------------------------------------
+    */
+
+    const finalLines: string[] = [];
+
+    let line = "";
+
+    for (const word of words) {
+      const testLine =
+        line.length === 0
+          ? word
+          : `${line} ${word}`;
+
+      if (
+        context.measureText(testLine).width >
+          maxWidth &&
+        line.length > 0
+      ) {
+        finalLines.push(line);
+        line = word;
+      } else {
+        line = testLine;
+      }
+    }
+
+    if (line.length > 0) {
+      finalLines.push(line);
+    }
+
     const visibleLines =
-      lines.slice(
-        0,
-        maxLines
-      );
+      finalLines.slice(0, maxLines);
 
     visibleLines.forEach(
-      (
-        line,
-        index
-      ) => {
+      (currentText, index) => {
         context.fillText(
-          line,
+          currentText,
           centerX,
           startY +
-            index *
-              lineHeight
+            index * lineHeight
         );
       }
     );
@@ -627,18 +585,9 @@ function App() {
     title: string
   ) => {
     const x = 175;
-
-    const y = 1005;
-
+    const y = 1010;
     const width = 674;
-
     const height = 68;
-
-    /*
-    |--------------------------------------------------------------------------
-    | RED BANNER
-    |--------------------------------------------------------------------------
-    */
 
     context.beginPath();
 
@@ -655,36 +604,20 @@ function App() {
 
     context.fill();
 
-    /*
-    |--------------------------------------------------------------------------
-    | GOLD BORDER
-    |--------------------------------------------------------------------------
-    */
-
-    context.lineWidth =
-      4;
+    context.lineWidth = 4;
 
     context.strokeStyle =
       "#c8932b";
 
     context.stroke();
 
-    /*
-    |--------------------------------------------------------------------------
-    | TITLE
-    |--------------------------------------------------------------------------
-    */
-
-    let fontSize =
-      32;
+    let fontSize = 32;
 
     context.font =
       `700 ${fontSize}px "Noto Sans Sinhala", sans-serif`;
 
     while (
-      context.measureText(
-        title
-      ).width >
+      context.measureText(title).width >
         width - 70 &&
       fontSize > 20
     ) {
@@ -694,18 +627,14 @@ function App() {
         `700 ${fontSize}px "Noto Sans Sinhala", sans-serif`;
     }
 
-    context.fillStyle =
-      "#ffffff";
+    context.fillStyle = "#ffffff";
 
-    context.textAlign =
-      "center";
+    context.textAlign = "center";
 
     context.fillText(
       title,
-      CANVAS_WIDTH / 2,
-      y +
-        height / 2 +
-        1
+      512,
+      y + height / 2
     );
   };
 
@@ -722,7 +651,7 @@ function App() {
   ) => {
     /*
     |--------------------------------------------------------------------------
-    | GOLD DIAMOND
+    | DIAMOND
     |--------------------------------------------------------------------------
     */
 
@@ -755,21 +684,17 @@ function App() {
     |--------------------------------------------------------------------------
     */
 
-    context.textAlign =
-      "left";
+    context.textAlign = "left";
 
-    let fontSize =
-      23;
+    let fontSize = 23;
 
     context.font =
       `600 ${fontSize}px "Noto Sans Sinhala", sans-serif`;
 
     while (
-      context.measureText(
-        text
-      ).width >
+      context.measureText(text).width >
         720 &&
-      fontSize > 17
+      fontSize > 16
     ) {
       fontSize--;
 
@@ -786,51 +711,47 @@ function App() {
       y
     );
 
-    context.textAlign =
-      "center";
+    context.textAlign = "center";
   };
 
   /*
   |--------------------------------------------------------------------------
-  | DOWNLOAD PNG
+  | DOWNLOAD
   |--------------------------------------------------------------------------
   */
 
-  const downloadInvitation =
-    () => {
-      const canvas =
-        canvasRef.current;
+  const downloadInvitation = () => {
+    const canvas =
+      canvasRef.current;
 
-      if (!canvas) {
-        return;
-      }
+    if (!canvas) {
+      return;
+    }
 
-      const cleanName =
-        inviteeName.trim()
-          ? inviteeName
-              .trim()
-              .replace(
-                /[^a-zA-Z0-9\u0D80-\u0DFF]+/g,
-                "_"
-              )
-          : "kovil_invitation";
+    const cleanName =
+      inviteeName.trim()
+        ? inviteeName
+            .trim()
+            .replace(
+              /[^a-zA-Z0-9\u0D80-\u0DFF]+/g,
+              "_"
+            )
+        : "kovil_invitation";
 
-      const link =
-        document.createElement(
-          "a"
-        );
+    const link =
+      document.createElement("a");
 
-      link.download =
-        `${cleanName}_invitation.png`;
+    link.download =
+      `${cleanName}_invitation.png`;
 
-      link.href =
-        canvas.toDataURL(
-          "image/png",
-          1.0
-        );
+    link.href =
+      canvas.toDataURL(
+        "image/png",
+        1.0
+      );
 
-      link.click();
-    };
+    link.click();
+  };
 
   /*
   |--------------------------------------------------------------------------
@@ -849,13 +770,13 @@ function App() {
 
     setInviteeName("");
 
+    setInviteeType("single");
+
     setVenueName(
       "8/ඒ/10, පහලහේන පාර, පැතුම් උයන, කඹුරුගොඩ,"
     );
 
-    setLocation(
-      "බණ්ඩාරගම"
-    );
+    setLocation("බණ්ඩාරගම");
 
     setMainMessage(
       DEFAULT_MAIN_MESSAGE
@@ -895,10 +816,7 @@ function App() {
   return (
     <div className="app">
 
-      {/* HEADER */}
-
       <header className="app-header">
-
         <h1>
           ආරාධනා පත්‍ර නිර්මාණය
         </h1>
@@ -906,23 +824,18 @@ function App() {
         <p>
           Kovil Ceremony Invitation Generator
         </p>
-
       </header>
-
-      {/* MAIN */}
 
       <main className="workspace">
 
-        {/* ================================================= */}
-        {/* FORM */}
-        {/* ================================================= */}
+        {/* =================================================
+            FORM
+        ================================================= */}
 
         <section className="control-panel">
 
           <div className="panel-header">
-
             <div>
-
               <h2>
                 ආරාධනා විස්තර
               </h2>
@@ -930,12 +843,10 @@ function App() {
               <span>
                 Invitation Details
               </span>
-
             </div>
-
           </div>
 
-          {/* INVITEE NAME */}
+          {/* INVITEE */}
 
           <div className="form-group highlight">
 
@@ -960,6 +871,8 @@ function App() {
 
           </div>
 
+          {/* AUDIENCE */}
+
           <div className="form-group highlight">
 
             <label>
@@ -975,7 +888,8 @@ function App() {
               onChange={(event) =>
                 setInviteeType(
                   event.target.value as
-                    "single" | "group"
+                    | "single"
+                    | "group"
                 )
               }
             >
@@ -1267,18 +1181,13 @@ function App() {
               }
               disabled={!background}
             >
-              <span>
-                ⬇
-              </span>
-
+              <span>⬇</span>
               Download PNG
             </button>
 
             <button
               className="reset-button"
-              onClick={
-                resetForm
-              }
+              onClick={resetForm}
             >
               Reset
             </button>
@@ -1287,16 +1196,14 @@ function App() {
 
         </section>
 
-        {/* ================================================= */}
-        {/* PREVIEW */}
-        {/* ================================================= */}
+        {/* =================================================
+            PREVIEW
+        ================================================= */}
 
         <section className="preview-panel">
 
           <div className="panel-header">
-
             <div>
-
               <h2>
                 Preview
               </h2>
@@ -1304,9 +1211,7 @@ function App() {
               <span>
                 Live Invitation Preview
               </span>
-
             </div>
-
           </div>
 
           <div className="preview-container">
