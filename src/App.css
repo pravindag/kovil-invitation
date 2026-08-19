@@ -2,22 +2,29 @@
   "https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap"
 );
 
-/* ================================================= */
-/* GLOBAL */
-/* ================================================= */
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  margin: 0;
+html {
+  width: 100%;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  overflow-x: hidden;
+
   font-family:
     "Noto Sans Sinhala",
     Arial,
@@ -34,24 +41,32 @@ body {
     );
 }
 
-/* ================================================= */
-/* APP */
-/* ================================================= */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   APP
+========================================================= */
 
 .app {
+  width: 100%;
   min-height: 100vh;
 
   padding: 30px;
 }
 
-/* ================================================= */
-/* HEADER */
-/* ================================================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .app-header {
-  text-align: center;
+  width: 100%;
 
   margin-bottom: 30px;
+
+  text-align: center;
 }
 
 .app-header h1 {
@@ -60,6 +75,7 @@ body {
   color: #72261e;
 
   font-size: 30px;
+  line-height: 1.4;
 
   font-weight: 700;
 }
@@ -69,20 +85,17 @@ body {
 
   color: #958575;
 
-  font-family:
-    Arial,
-    sans-serif;
+  font-family: Arial, sans-serif;
 
   font-size: 13px;
 }
 
-/* ================================================= */
-/* WORKSPACE */
-/* ================================================= */
+/* =========================================================
+   MAIN WORKSPACE
+========================================================= */
 
 .workspace {
   width: 100%;
-
   max-width: 1500px;
 
   margin: 0 auto;
@@ -90,27 +103,24 @@ body {
   display: grid;
 
   grid-template-columns:
-    minmax(350px, 430px)
-    minmax(500px, 1fr);
+    minmax(340px, 430px)
+    minmax(0, 1fr);
 
   gap: 30px;
 
   align-items: start;
 }
 
-/* ================================================= */
-/* PANELS */
-/* ================================================= */
+/* =========================================================
+   PANELS
+========================================================= */
 
 .control-panel,
 .preview-panel {
+  width: 100%;
+
   background:
-    rgba(
-      255,
-      255,
-      255,
-      0.97
-    );
+    rgba(255, 255, 255, 0.97);
 
   border:
     1px solid #ddd1c1;
@@ -119,12 +129,9 @@ body {
 
   box-shadow:
     0 15px 45px
-    rgba(
-      70,
-      50,
-      30,
-      0.12
-    );
+    rgba(70, 50, 30, 0.12);
+
+  overflow: hidden;
 }
 
 .control-panel {
@@ -135,19 +142,19 @@ body {
   padding: 20px;
 }
 
-/* ================================================= */
-/* PANEL HEADER */
-/* ================================================= */
+/* =========================================================
+   PANEL HEADER
+========================================================= */
 
 .panel-header {
   display: flex;
 
   justify-content: space-between;
-
   align-items: center;
 
-  margin-bottom: 22px;
+  width: 100%;
 
+  margin-bottom: 22px;
   padding-bottom: 15px;
 
   border-bottom:
@@ -160,6 +167,7 @@ body {
   color: #72261e;
 
   font-size: 21px;
+  line-height: 1.4;
 
   font-weight: 700;
 }
@@ -171,33 +179,36 @@ body {
 
   color: #998878;
 
-  font-family:
-    Arial,
-    sans-serif;
+  font-family: Arial, sans-serif;
 
   font-size: 11px;
 }
 
-/* ================================================= */
-/* FORM GROUP */
-/* ================================================= */
+/* =========================================================
+   FORM
+========================================================= */
 
 .form-group {
+  width: 100%;
+
   margin-bottom: 17px;
 }
 
 .form-group label {
   display: block;
 
+  width: 100%;
+
   margin-bottom: 2px;
 
   color: #4d352a;
 
   font-size: 14px;
+  line-height: 1.5;
 
   font-weight: 600;
 
-  line-height: 1.5;
+  word-break: break-word;
 }
 
 .field-hint {
@@ -207,18 +218,18 @@ body {
 
   color: #9b8c7c;
 
-  font-family:
-    Arial,
-    sans-serif;
+  font-family: Arial, sans-serif;
 
   font-size: 11px;
 }
 
-/* ================================================= */
-/* INVITEE HIGHLIGHT */
-/* ================================================= */
+/* =========================================================
+   INVITEE HIGHLIGHT
+========================================================= */
 
 .form-group.highlight {
+  width: 100%;
+
   padding: 15px;
 
   border:
@@ -234,13 +245,17 @@ body {
     );
 }
 
-/* ================================================= */
-/* INPUTS */
-/* ================================================= */
+/* =========================================================
+   INPUTS
+========================================================= */
 
 input,
-textarea {
+textarea,
+select {
+  display: block;
+
   width: 100%;
+  max-width: 100%;
 
   border:
     1px solid #d5cabe;
@@ -265,7 +280,8 @@ textarea {
     box-shadow 0.2s ease;
 }
 
-input {
+input,
+select {
   height: 44px;
 
   padding:
@@ -284,17 +300,13 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   border-color: #a4772c;
 
   box-shadow:
     0 0 0 3px
-    rgba(
-      164,
-      119,
-      44,
-      0.12
-    );
+    rgba(164, 119, 44, 0.12);
 }
 
 input::placeholder,
@@ -302,11 +314,13 @@ textarea::placeholder {
   color: #b5a99e;
 }
 
-/* ================================================= */
-/* BUTTONS */
-/* ================================================= */
+/* =========================================================
+   BUTTON GROUP
+========================================================= */
 
 .button-group {
+  width: 100%;
+
   display: flex;
 
   gap: 10px;
@@ -326,9 +340,7 @@ button {
 
   cursor: pointer;
 
-  font-family:
-    Arial,
-    sans-serif;
+  font-family: Arial, sans-serif;
 
   font-size: 13px;
 
@@ -356,9 +368,9 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ================================================= */
-/* DOWNLOAD */
-/* ================================================= */
+/* =========================================================
+   DOWNLOAD
+========================================================= */
 
 .download-button {
   flex: 1;
@@ -374,12 +386,7 @@ button:disabled {
 
   box-shadow:
     0 5px 15px
-    rgba(
-      118,
-      39,
-      31,
-      0.2
-    );
+    rgba(118, 39, 31, 0.2);
 }
 
 .download-button:hover:not(:disabled) {
@@ -392,23 +399,20 @@ button:disabled {
 
   box-shadow:
     0 7px 18px
-    rgba(
-      118,
-      39,
-      31,
-      0.28
-    );
+    rgba(118, 39, 31, 0.28);
 }
 
 .download-button span {
   margin-right: 7px;
 }
 
-/* ================================================= */
-/* RESET */
-/* ================================================= */
+/* =========================================================
+   RESET
+========================================================= */
 
 .reset-button {
+  min-width: 90px;
+
   color: #5c5147;
 
   background: #eee9e2;
@@ -418,14 +422,24 @@ button:disabled {
   background: #e2dbd2;
 }
 
-/* ================================================= */
-/* PREVIEW */
-/* ================================================= */
+/* =========================================================
+   PREVIEW PANEL
+========================================================= */
+
+.preview-panel {
+  min-width: 0;
+}
+
+/* =========================================================
+   PREVIEW CONTAINER
+========================================================= */
 
 .preview-container {
   position: relative;
 
   width: 100%;
+
+  min-width: 0;
 
   min-height: 700px;
 
@@ -437,177 +451,371 @@ button:disabled {
 
   align-items: flex-start;
 
-  background:
-    #e9e4dd;
+  background: #e9e4dd;
 
   border-radius: 12px;
 
-  overflow: auto;
+  overflow: hidden;
 }
 
-/* ================================================= */
-/* INVITATION CANVAS */
-/* ================================================= */
+/* =========================================================
+   CANVAS
+========================================================= */
 
 .invitation-canvas {
   display: block;
 
-  width: min(
-    100%,
-    700px
-  );
+  width: 100%;
+  max-width: 700px;
 
   height: auto;
+
+  aspect-ratio: 1024 / 1536;
+
+  object-fit: contain;
 
   background: #ffffff;
 
   box-shadow:
     0 15px 45px
-    rgba(
-      55,
-      40,
-      25,
-      0.22
-    );
+    rgba(55, 40, 25, 0.22);
 }
 
-/* ================================================= */
-/* LOADING */
-/* ================================================= */
+/* =========================================================
+   LOADING
+========================================================= */
 
 .loading {
   position: absolute;
 
   top: 50%;
-
   left: 50%;
 
   transform:
-    translate(
-      -50%,
-      -50%
-    );
+    translate(-50%, -50%);
 
   color: #8c7b6b;
 
-  font-family:
-    Arial,
-    sans-serif;
+  font-family: Arial, sans-serif;
 
   font-size: 14px;
+
+  white-space: nowrap;
 }
 
-/* ================================================= */
-/* TABLET */
-/* ================================================= */
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1400px) {
+  .app {
+    padding: 40px;
+  }
+
+  .workspace {
+    gap: 40px;
+  }
+
+  .preview-container {
+    padding: 30px;
+  }
+}
+
+/* =========================================================
+   TABLET / SMALL LAPTOP
+========================================================= */
 
 @media (max-width: 1100px) {
+  .app {
+    padding: 20px;
+  }
+
   .workspace {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      minmax(300px, 380px)
+      minmax(0, 1fr);
+
+    gap: 20px;
   }
 
   .control-panel {
-    width: 100%;
+    padding: 20px;
+  }
 
+  .preview-panel {
+    padding: 15px;
+  }
+
+  .preview-container {
+    padding: 12px;
+  }
+}
+
+/* =========================================================
+   TABLET PORTRAIT
+========================================================= */
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .control-panel {
     max-width: 700px;
 
     margin: 0 auto;
   }
 
   .preview-panel {
-    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
   }
 
   .preview-container {
     min-height: auto;
-  }
-}
 
-/* ================================================= */
-/* MOBILE */
-/* ================================================= */
-
-@media (max-width: 700px) {
-  .app {
     padding: 15px;
   }
 
-  .app-header h1 {
-    font-size: 24px;
+  .invitation-canvas {
+    width: 100%;
+    max-width: 650px;
   }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .app {
+    width: 100%;
+
+    padding:
+      12px;
+  }
+
+  .app-header {
+    margin-bottom: 18px;
+  }
+
+  .app-header h1 {
+    font-size: 22px;
+
+    line-height: 1.5;
+  }
+
+  .app-header p {
+    font-size: 11px;
+  }
+
+  /* ---------------------------------------------
+     PANELS
+  --------------------------------------------- */
 
   .control-panel,
   .preview-panel {
+    border-radius: 12px;
+
+    box-shadow:
+      0 8px 25px
+      rgba(70, 50, 30, 0.10);
+  }
+
+  .control-panel {
     padding: 15px;
   }
 
-  .button-group {
-    flex-direction: column;
+  .preview-panel {
+    padding: 10px;
   }
 
-  .preview-container {
-    padding: 8px;
-  }
-}
-
-/* ================================================= */
-/* SMALL MOBILE */
-/* ================================================= */
-
-@media (max-width: 450px) {
-  .app-header {
-    margin-bottom: 20px;
-  }
-
-  .app-header h1 {
-    font-size: 21px;
-  }
+  /* ---------------------------------------------
+     PANEL HEADER
+  --------------------------------------------- */
 
   .panel-header {
-    display: block;
+    margin-bottom: 17px;
+    padding-bottom: 12px;
+  }
+
+  .panel-header h2 {
+    font-size: 18px;
   }
 
   .panel-header span {
-    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  /* ---------------------------------------------
+     FORM
+  --------------------------------------------- */
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+  .field-hint {
+    font-size: 10px;
+
+    margin-bottom: 5px;
+  }
+
+  .form-group.highlight {
+    padding: 12px;
+  }
+
+  /* ---------------------------------------------
+     INPUTS
+  --------------------------------------------- */
+
+  input,
+  select {
+    height: 46px;
+
+    padding:
+      8px 10px;
+
+    font-size: 14px;
+  }
+
+  textarea {
+    min-height: 100px;
+
+    padding:
+      9px 10px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+  /* ---------------------------------------------
+     BUTTONS
+  --------------------------------------------- */
+
+  .button-group {
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .download-button,
+  .reset-button {
+    width: 100%;
+
+    min-height: 46px;
+  }
+
+  /* ---------------------------------------------
+     PREVIEW
+  --------------------------------------------- */
+
+  .preview-container {
+    width: 100%;
+
+    padding: 5px;
+
+    border-radius: 8px;
+
+    background: #e9e4dd;
+
+    overflow: hidden;
+  }
+
+  .invitation-canvas {
+    width: 100%;
+
+    max-width: none;
+
+    height: auto;
+
+    box-shadow:
+      0 7px 20px
+      rgba(55, 40, 25, 0.18);
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .app {
+    padding:
+      8px;
+  }
+
+  .app-header {
+    margin-bottom: 14px;
+  }
+
+  .app-header h1 {
+    font-size: 19px;
+  }
+
+  .app-header p {
+    font-size: 10px;
+  }
+
+  .control-panel {
+    padding: 12px;
+  }
+
+  .preview-panel {
+    padding: 7px;
+  }
+
+  .panel-header h2 {
+    font-size: 17px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
   }
 
   .preview-container {
-    padding: 4px;
+    padding: 3px;
   }
 }
 
-select {
-  width: 100%;
-  height: 44px;
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
 
-  padding: 8px 12px;
+@media (max-width: 340px) {
+  .app {
+    padding: 5px;
+  }
 
-  border: 1px solid #d5cabe;
-  border-radius: 8px;
+  .control-panel {
+    padding: 10px;
+  }
 
-  background: #ffffff;
-  color: #382b25;
+  .preview-panel {
+    padding: 5px;
+  }
 
-  outline: none;
+  .app-header h1 {
+    font-size: 17px;
+  }
 
-  font-family:
-    "Noto Sans Sinhala",
-    Arial,
-    sans-serif;
-
-  font-size: 14px;
-
-  cursor: pointer;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-select:focus {
-  border-color: #a4772c;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(164, 119, 44, 0.12);
+  .form-group.highlight {
+    padding: 10px;
+  }
 }
