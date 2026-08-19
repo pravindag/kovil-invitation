@@ -374,22 +374,22 @@ function App() {
     context: CanvasRenderingContext2D,
     value: string
   ) => {
-    let fontSize = 44;
+    let fontSize = 33;
 
     if (value.length > 18) {
-      fontSize = 44;
+      fontSize = 33;
     }
 
     if (value.length > 25) {
-      fontSize = 40;
+      fontSize = 31;
     }
 
     if (value.length > 35) {
-      fontSize = 35;
+      fontSize = 29;
     }
 
     if (value.length > 45) {
-      fontSize = 31;
+      fontSize = 27;
     }
 
     context.textAlign = "center";
