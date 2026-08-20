@@ -28,7 +28,7 @@ function App() {
     useState("");
 
   const [inviteeType, setInviteeType] =
-    useState<"single" | "group">("single");
+    useState("");
 
   const [venueName, setVenueName] =
     useState(
@@ -281,14 +281,9 @@ function App() {
     |--------------------------------------------------------------------------
     */
 
-    const invitationAudience =
-      inviteeType === "single"
-        ? "ඔබට"
-        : "ඔබ සැමට";
-
     drawWrappedText(
       context,
-      `${invitationAudience} කාරුණිකව ආරාධනා කර සිටිමු.`,
+      `${inviteeType.trim()} කාරුණිකව ආරාධනා කර සිටිමු.`,
       512,
       985,
       790,
@@ -770,7 +765,7 @@ function App() {
 
     setInviteeName("");
 
-    setInviteeType("single");
+    setInviteeType("");
 
     setVenueName(
       "8/ඒ/10, පහලහේන පාර, පැතුම් උයන, කඹුරුගොඩ,"
@@ -866,7 +861,7 @@ function App() {
                   event.target.value
                 )
               }
-              placeholder="උදා: ප්‍රවීන් මහතා"
+              placeholder="උදා: ප්‍රවීන්ද මහතා"
             />
 
           </div>
@@ -883,25 +878,16 @@ function App() {
               Invitation Audience
             </span>
 
-            <select
+            <input
+              type="text"
               value={inviteeType}
               onChange={(event) =>
                 setInviteeType(
-                  event.target.value as
-                    | "single"
-                    | "group"
+                  event.target.value
                 )
               }
-            >
-              <option value="single">
-                එක් පුද්ගලයෙකුට - ඔබට
-              </option>
-
-              <option value="group">
-                කිහිප දෙනෙකුට - ඔබ සැමට
-              </option>
-            </select>
-
+              placeholder="උදා: ඔබට / ඔබ සැමට"
+            />
           </div>
 
           {/* GREETING */}
